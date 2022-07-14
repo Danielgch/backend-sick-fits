@@ -25,7 +25,7 @@ const { withAuth } = createAuth({
   secretField: 'password',
   initFirstItem: {
     fields: ['name', 'email', 'password']
-    // TODO: Add in initial
+    // TODO: Add in inital roles here
   },
   passwordResetLink: {
     async sendToken(args) {
@@ -59,10 +59,7 @@ export default withAuth(
     }),
     ui: {
       // show the UI only for people who pass this test
-      isAccessAllowed: ({ session }) => {
-        console.log(session, 'Session');
-        return !!session?.data;
-      }
+      isAccessAllowed: ({ session }) => !!session?.data
     },
     session: withItemData(statelessSessions(sessionConfig), {
       User: 'id name email'
